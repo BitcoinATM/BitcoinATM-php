@@ -1,0 +1,5 @@
+DirectoryIndex start.php
+
+<LIMIT GET>
+allow from localhost
+</LIMIT>

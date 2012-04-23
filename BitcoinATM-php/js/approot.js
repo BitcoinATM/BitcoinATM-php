@@ -1,0 +1,1 @@
+var $_approot = '/atm_dev/';

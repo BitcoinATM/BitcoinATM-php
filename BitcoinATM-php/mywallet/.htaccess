@@ -1,0 +1,7 @@
+DirectoryIndex splash_screen.php
+
+<LIMIT GET>
+order deny,allow
+deny from all
+allow from localhost
+</LIMIT>

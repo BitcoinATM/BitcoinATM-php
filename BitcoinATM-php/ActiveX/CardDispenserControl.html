@@ -1,0 +1,251 @@
+<SCRIPT ID=clientEventHandlersJS LANGUAGE=javascript>
+<!--
+///////////////////
+// MCDU controls //
+///////////////////
+function MCDUSetTraceLog(traceLog) {
+	CardDispenser.TraceLog = traceLog;
+}
+
+function MCDUOpen(port, pollingInterval) { // default: port = 6 pollingInterval = 100
+	CardDispenser.PortNumber = port;
+	CardDispenser.BaudRate = 9600;
+	CardDispenser.Parity = 0;
+	CardDispenser.StopBits = 0;
+	CardDispenser.ByteSize = 8;
+	CardDispenser.PollingInterval = 1000;
+	//CardDispenser.DeviceID = txtMCDUDeviceID.value;
+
+	var rval = CardDispenser.OpenDevice();
+	debugOut("CardDispenser::OpenDevice()->" + rval);
+	return rval;
+}
+
+function MCDUWideOpenDevice(portFrom, portTo) {
+	CardDispenser.BaudRate = 9600;
+	CardDispenser.Parity = 0;
+	CardDispenser.StopBits = 0;
+	CardDispenser.ByteSize = 8;
+	CardDispenser.PollingInterval = 1000;
+	//CardDispenser.DeviceID = txtMCDUDeviceID.value;
+
+	var rval = CardDispenser.WideOpenDevice(portFrom, portTo);
+	debugOut("CardDispenser::WideOpenDevice()->" + rval);
+	return rval;
+}
+
+function MCDUClose() {
+	CardDispenser.CloseDevice();
+	debugOut("CardDispenser::Close()");
+}
+
+function MCDUInitialize() {
+	var rval = CardDispenser.InitializeDevice();
+	debugOut("CardDispenser::Initialize()->" + rval);
+	return rval;
+}
+
+function MCDUDiagnosis() {
+	var rval = CardDispenser.Diagnosis();
+	debugOut("CardDispenser::Diagnosis()->" + rval)
+	return rval;
+}
+
+function MCDUDispenseEject(dispenseEject) {
+	var rval = CardDispenser.DispenseAndEject(dispenseEject);
+	debugOut("CardDispenser::DispenseAndEject()->" + rval);
+	return rval;
+}
+
+function MCDUDispenseWait(dispenseWait) {
+	var rval = CardDispenser.DispenseAndWait(dispenseWait);
+	debugOut("CardDispenser::DispenseAndWait()->" + rval);
+	return rval;
+}
+
+function MCDUEject() {
+	var rval = CardDispenser.Eject();
+	debugOut("CardDispenser::Eject()->" + rval);
+	return rval;
+}
+
+function MCDUMotorTest(cmd) {
+	var rval = CardDispenser.MotorTest(cmd);
+	debugOut("CardDispenser::MotorTest()->" + rval);
+	return rval;
+}
+
+function MCDURetrieve() {
+	var rval = CardDispenser.Retrieve();
+	debugOut("CardDispenser::Retrieve()->" + rval);
+	return rval;
+}
+
+function MCDUShutterTest(cmd) {
+	var rval = CardDispenser.ShutterTest(cmd);
+	debugOut("CardDispenser::ShutterTest()->" + rval);
+	return rval;
+}
+
+function MCDUClose() {
+	var rval = CardDispenser.CloseDevice();
+	debugOut("CardDispenser::CloseDevice()->" + rval);
+	return rval;
+}
+
+function MCDUDispenseExit(dispenseExit) {
+	var rval = CardDispenser.DispenseAndExit(dispenseExit);
+	debugOut("CardDispenser::DispenseAndExit()->" + rval);
+	return rval;
+}
+
+function MCDUExit() {
+	var rval = CardDispenser.Exit();
+	debugOut("CardDispenser::Exit()->" + rval);
+	return rval;
+}
+
+///////////////////////////////////
+// Card Dispenser Event Handlers //
+///////////////////////////////////
+function CardDispenser_DeviceOpened(OpenedPortNumber) {
+	debugOut("Card Dispenser Opened. Port Number: " + OpenedPortNumber);
+	debugOut("Version : " + CardDispenser.Version);
+	debugOut("Device ID: " + CardDispenser.DeviceID);
+}
+
+
+function CardDispenser_DeviceClosed() {
+	debugOut("Card Dispenser Closed.");
+}
+
+function CardDispenser_InitializeCompleted() {
+	debugOut("Card Dispenser Initialized.");
+}
+
+function CardDispenser_Statuschanged(ChangedStatus, PrevStatus, CurrentStatus) {
+	// Add tracer code
+}
+
+function CardDispenser_CardEjected() {
+	debugOut("Card Dispenser Card Ejected.");
+}
+
+function CardDispenser_DispenseEjectCompleted(CardTrack1, CardTrack2, CardTrack3) {
+	debugOut("Card Dispenser Dispense Eject Completed.");
+}
+
+function CardDispenser_DispenseWaitCompleted(CardTrack1, CardTrack2, CardTrack3) {
+	debugOut("Card Dispenser Dispense Wait Completed.");
+}
+
+function CardDispenser_DispenseExitCompleted(CardTrack1, CardTrack2, CardTrack3) {
+	debugOut("Card Dispenser Dispense Exit Completed.");
+}
+
+function CardDispenser_CardRetrieved() {
+	debugOut("Card Dispenser Card Retrieved.");
+}
+
+function CardDispenser_DeviceClosed() {
+	debugOut("Card Dispenser Device Closed.");
+}
+
+function CardDispenser_DiagnosisCompleted() {
+	debugOut("Card Dispenser Diagnosis Completed.");
+}
+
+function CardDispenser_MotorTestCompleted(cmd) {
+	debugOut("Card Dispenser Motor Test Completed: " + cmd); 
+}
+
+function CardDispenser_ShutterTestCompleted() {
+	debugOut("Card Dispenser Shutter Test Completed.");
+}
+
+function CardDispenser_CardExited() {
+	debugOut("Card Dispenser Card Exited.");
+}
+
+function CardDispenser_DeviceError(reason) {
+	debugOut("Card Dispenser Device Error: " + reason);
+}
+
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT=DeviceOpened(OpenedPortNumber)>
+<!--
+ CardDispenser_DeviceOpened(OpenedPortNumber)
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT=DeviceClosed>
+<!--
+ CardDispenser_DeviceClosed()
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT=InitializeCompleted>
+<!--
+ CardDispenser_InitializeCompleted()
+//-->
+</SCRIPT>
+
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT="Statuschanged(ChangedStatus, PrevStatus, CurrentStatus)">
+<!--
+ CardDispenser_Statuschanged(ChangedStatus, PrevStatus, CurrentStatus)
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT=CardEjected>
+<!--
+ CardDispenser_CardEjected()
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT="DispenseEjectCompleted(CardTrack1, CardTrack2, CardTrack3)">
+<!--
+ CardDispenser_DispenseEjectCompleted(CardTrack1, CardTrack2, CardTrack3)
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT="DispenseWaitCompleted(CardTrack1, CardTrack2, CardTrack3)">
+<!--
+ CardDispenser_DispenseWaitCompleted(CardTrack1, CardTrack2, CardTrack3)
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT="DispenseExitCompleted(CardTrack1, CardTrack2, CardTrack3)">
+<!--
+ CardDispenser_DispenseExitCompleted(CardTrack1, CardTrack2, CardTrack3)
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT=CardRetrieved>
+<!--
+ CardDispenser_CardRetrieved()
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT=DeviceClosed>
+<!--
+ CardDispenser_DeviceClosed()
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT="DiagnosisCompleted()">
+<!--
+ CardDispenser_DiagnosisCompleted()
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT="MotorTestCompleted(SubCmd)">
+<!--
+ CardDispenser_MotorTestCompleted(SubCmd)
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT="ShutterTestCompleted()">
+<!--
+ CardDispenser_ShutterTestCompleted()
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT=CardExited>
+<!--
+ CardDispenser_CardExited()
+//-->
+</SCRIPT>
+<SCRIPT LANGUAGE=javascript FOR=CardDispenser EVENT="DeviceError(Reason)">
+<!--
+ CardDispenser_DeviceError(Reason)
+//-->
+</SCRIPT>

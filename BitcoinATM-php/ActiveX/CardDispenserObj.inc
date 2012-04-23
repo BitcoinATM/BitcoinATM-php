@@ -1,0 +1,5 @@
+<OBJECT style="LEFT: 0px; TOP: 0px" classid="clsid:7401243B-A362-492D-9836-7900DABC3D4E" VIEWASTEXT name=CardDispenser>
+	<PARAM NAME="_Version" VALUE="65536">
+	<PARAM NAME="_ExtentX" VALUE="2646">
+	<PARAM NAME="_ExtentY" VALUE="1323">
+	<PARAM NAME="_StockProps" VALUE="0"></OBJECT>

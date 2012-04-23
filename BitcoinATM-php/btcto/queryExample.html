@@ -1,0 +1,22 @@
+<html>
+<head>
+	<script type="text/javascript">
+		function doQuery() {
+			var addressText = document.getElementById('addressText').value;
+			var url = "http://btc.to/" + addressText;
+			var req = new XMLHttpRequest();
+			req.open("GET", url);
+			req.send(null);
+			req.onreadystatechange = function() {
+				if (req.readyState == 4 && req.status == 200) {
+					document.getElementById('addressText').value = req.responseText;
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="text" size="60" id="addressText" />
+	<input type="button" onclick="doQuery();" value="Query btc.to" />
+</body>
+</html>
